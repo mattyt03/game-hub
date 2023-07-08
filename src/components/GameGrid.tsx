@@ -20,7 +20,7 @@ const GameGrid = ({ selectedGenre }: Props) => {
         spacing={5}
       >
         {loading && skeletons.map((id) => <GameCardSkeleton key={id} />)}
-        {data.map((game) => (
+        {!loading && data.map((game) => (
           <GameCard key={game.id} game={game} />
         ))}
       </SimpleGrid>
