@@ -21,6 +21,7 @@ const useGames = (
         genres: gameQuery.genre?.id,
         parent_platforms: gameQuery.platform?.id,
         ordering: gameQuery.order,
+        search: gameQuery.search,
       },
     },
     [gameQuery]

@@ -12,6 +12,7 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   order: string | null;
+  search: string | null;
 }
 
 const App = () => {
@@ -26,17 +27,28 @@ const App = () => {
       templateColumns={{ base: `1fr`, lg: "200px 1fr" }}
     >
       <GridItem area="nav" padding={5}>
-        <Navbar />
+        <Navbar onSearch={(search) => setGameQuery({ ...gameQuery, search })} />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" padding={5}>
-          <GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({...gameQuery, genre})} />
+          <GenreList
+            selectedGenre={gameQuery.genre}
+            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+          />
         </GridItem>
       </Show>
       <GridItem area="main" padding={5}>
         <HStack spacing={5} marginBottom={5}>
-          <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}/>
-          <SortSelector selectedOrder={gameQuery.order} onSelectOrder={(order) => setGameQuery({...gameQuery, order})}/>
+          <PlatformSelector
+            selectedPlatform={gameQuery.platform}
+            onSelectPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+          />
+          <SortSelector
+            selectedOrder={gameQuery.order}
+            onSelectOrder={(order) => setGameQuery({ ...gameQuery, order })}
+          />
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
