@@ -7,6 +7,7 @@ interface Props {
 }
 
 const SearchInput = ({ onSearch }: Props) => {
+  // TODO: review
   const ref = useRef<HTMLInputElement>(null);
   return (
     <form
