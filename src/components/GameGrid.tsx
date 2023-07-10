@@ -7,26 +7,20 @@ import { Platform } from "../hooks/usePlatforms";
 import { GameQuery } from "../App";
 
 interface Props {
-    gameQuery: GameQuery;
+  gameQuery: GameQuery;
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
   const { data, error, loading } = useGames(gameQuery);
   const skeletons = [...Array(10).keys()];
 
+  if (error) return <Text>{error}</Text>;
+
   return (
-    <>
-      {error && <Text>{error}</Text>}
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        spacing={6}
-      >
-        {loading && skeletons.map((id) => <GameCardSkeleton key={id} />)}
-        {!loading && data.map((game) => (
-          <GameCard key={game.id} game={game} />
-        ))}
-      </SimpleGrid>
-    </>
+    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+      {loading && skeletons.map((id) => <GameCardSkeleton key={id} />)}
+      {!loading && data.map((game) => <GameCard key={game.id} game={game} />)}
+    </SimpleGrid>
   );
 };
 
